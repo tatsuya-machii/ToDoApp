@@ -27,7 +27,7 @@ class HomeController extends Controller
         // 上記で、ログインに紐づくフォルダーを取得できたらタスク一覧にリダイレクト
         return redirect(
           route('tasks.index', [
-            'id'=>$folder->id
+            'folder'=>$folder->id
           ])
         );
       }
