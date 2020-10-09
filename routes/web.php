@@ -21,6 +21,9 @@ Route::get('/', function () {
 // ルートモデルバインディングにより、存在しないfolder,taskにアクセスすると404エラーを出力する。
 Route::group(['middleware' => 'auth'], function() {
 
+  route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
+  route::post('/folders/create', [FolderController::class, 'create']);
+
   Route::get('/home', [HomeController::class, 'index'])->name('home');
   // FolderPolicyのviewメソッドにより、自信と紐づかないFolderにアクセスした場合は403エラーを出力する。
   Route::group(['middleware' => 'can:view,folder'], function(){
@@ -32,8 +35,6 @@ Route::group(['middleware' => 'auth'], function() {
   });
 
 
-  route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
-  route::post('/folders/create', [FolderController::class, 'create']);
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
