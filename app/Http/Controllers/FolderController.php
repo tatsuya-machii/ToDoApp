@@ -27,7 +27,10 @@ class FolderController extends Controller
     public function create(CreateFolder $request){
 
       // フォルダモデルのインスタンスを作成する
-      $folder = new Folder();
+      if ($folder = new Folder()) {
+      }else{
+        echo 'error';
+      }
       // タイトルに入力値を代入する
       $folder->title = $request->title;
       // ユーザーに紐付けて保存
