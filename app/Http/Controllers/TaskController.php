@@ -92,14 +92,16 @@ class TaskController extends Controller
 
       $this->checkRelation($folder, $task);
 
+      $current_folder = $folder;
+
       // タスクの編集
       $task->title = $request->title;
       $task->status = $request->status;
       $task->due_date = $request->due_date;
-      $task->save();
+      $current_folder->tasks()->save($task);
 
       //タスク一覧ページにリダイレクト
-      return redirect()->route('tasks.index',['folder'=>$task->folder_id]);
+      return redirect()->route('tasks.index',['folder'=>$current_folder->id]);
     }
 
     private function checkRelation(Folder $folder, Task $task){
