@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Folder;
-use App\Http\requests\CreateFolder;
+use App\Http\Requests\CreateFolder;
 use Illuminate\Support\Facades\Auth;
 
 
