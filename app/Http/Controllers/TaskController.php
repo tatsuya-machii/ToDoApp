@@ -48,7 +48,7 @@ class TaskController extends Controller
     */
     public function showCreateForm(Folder $folder){
       return View('tasks.create', [
-        'id' => $id
+        'id' => $folder->id
       ]);
     }
 
@@ -66,7 +66,7 @@ class TaskController extends Controller
       $task->due_date = $request->due_date;
       $current_folder->Tasks()->save($task);
 
-      return redirect()->route('tasks.index', ['id'=>$current_folder->id]);
+      return redirect()->route('tasks.index', ['folder'=>$current_folder->id]);
     }
 
     /**
@@ -99,13 +99,13 @@ class TaskController extends Controller
       $task->save();
 
       //タスク一覧ページにリダイレクト
-      return redirect()->route('tasks.index',['id'=>$task->folder_id]);
+      return redirect()->route('tasks.index',['folder'=>$task->folder_id]);
     }
 
     private function checkRelation(Folder $folder, Task $task){
       if ($folder->id !== $task->folder_id) {
         abort(404);
-      }      
+      }
     }
 
 
